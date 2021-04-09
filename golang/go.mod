@@ -1,4 +1,4 @@
-module github.com/simar7/tracee-signatures
+module github.com/simar7/tracee-signatures/golang
 
 go 1.16
 
