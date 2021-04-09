@@ -1,4 +1,4 @@
-package main
+package traceesignatures
 
 import (
 	tracee "github.com/aquasecurity/tracee/tracee-ebpf/tracee/external"
