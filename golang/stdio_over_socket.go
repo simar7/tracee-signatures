@@ -1,4 +1,4 @@
-package main
+package traceesigs
 
 import (
 	"fmt"
@@ -8,19 +8,19 @@ import (
 	"github.com/aquasecurity/tracee/tracee-rules/types"
 )
 
-type stdioOverSocket struct {
+type StdioOverSocket struct {
 	cb              types.SignatureHandler
 	processSocketIp map[int]map[int]string
 }
 
-func (sig *stdioOverSocket) Init(cb types.SignatureHandler) error {
+func (sig *StdioOverSocket) Init(cb types.SignatureHandler) error {
 	sig.cb = cb
 	sig.processSocketIp = make(map[int]map[int]string)
 
 	return nil
 }
 
-func (sig *stdioOverSocket) GetMetadata() (types.SignatureMetadata, error) {
+func (sig *StdioOverSocket) GetMetadata() (types.SignatureMetadata, error) {
 	return types.SignatureMetadata{
 		ID:          "TRC-1",
 		Version:     "0.1.0",
@@ -34,7 +34,7 @@ func (sig *stdioOverSocket) GetMetadata() (types.SignatureMetadata, error) {
 	}, nil
 }
 
-func (sig *stdioOverSocket) GetSelectedEvents() ([]types.SignatureEventSelector, error) {
+func (sig *StdioOverSocket) GetSelectedEvents() ([]types.SignatureEventSelector, error) {
 	return []types.SignatureEventSelector{
 		{Source: "tracee", Name: "connect"},
 		{Source: "tracee", Name: "dup"},
@@ -45,7 +45,7 @@ func (sig *stdioOverSocket) GetSelectedEvents() ([]types.SignatureEventSelector,
 	}, nil
 }
 
-func (sig *stdioOverSocket) OnEvent(e types.Event) error {
+func (sig *StdioOverSocket) OnEvent(e types.Event) error {
 
 	eventObj, ok := e.(tracee.Event)
 	if !ok {
@@ -165,11 +165,11 @@ func (sig *stdioOverSocket) OnEvent(e types.Event) error {
 	return nil
 }
 
-func (sig *stdioOverSocket) OnSignal(s types.Signal) error {
+func (sig *StdioOverSocket) OnSignal(s types.Signal) error {
 	return nil
 }
 
-func isStdioOverSocket(sig *stdioOverSocket, eventObj tracee.Event, pidSocketMap map[int]string, srcFd int, dstFd int) error {
+func isStdioOverSocket(sig *StdioOverSocket, eventObj tracee.Event, pidSocketMap map[int]string, srcFd int, dstFd int) error {
 	stdAll := []int{0, 1, 2}
 	ip, socketfdExists := pidSocketMap[srcFd]
 

@@ -1,8 +1,9 @@
-package main
+package traceesigs
 
 import (
-	tracee "github.com/aquasecurity/tracee/tracee-ebpf/tracee/external"
 	"testing"
+
+	tracee "github.com/aquasecurity/tracee/tracee-ebpf/tracee/external"
 
 	"github.com/aquasecurity/tracee/tracee-rules/signatures/signaturestest"
 	"github.com/aquasecurity/tracee/tracee-rules/types"
@@ -295,7 +296,7 @@ func TestStdioOverSocket(t *testing.T) {
 	}
 
 	for _, st := range SigTests {
-		sig := stdioOverSocket{}
+		sig := StdioOverSocket{}
 		st.Init(&sig)
 		for _, e := range st.Events {
 			err := sig.OnEvent(e)
