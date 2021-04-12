@@ -1,4 +1,4 @@
-package traceesignatures
+package main
 
 import "github.com/aquasecurity/tracee/tracee-rules/types"
 

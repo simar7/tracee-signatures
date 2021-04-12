@@ -1,4 +1,4 @@
-package traceesignatures
+package main
 
 import (
 	"fmt"
